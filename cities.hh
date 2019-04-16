@@ -44,3 +44,5 @@ class Cities {
 };
 std::istream& operator>> (std::istream& is, Cities& city); 
 std::ostream& operator<< (std::ostream& out, Cities& city);
+
+Cities::permutation_t random_permutation(unsigned len);

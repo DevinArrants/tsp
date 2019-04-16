@@ -5,6 +5,8 @@
 #include <fstream>
 #include <assert.h>
 #include <cmath>
+#include <random>
+#include <algorithm>
 
 //Implement operator<< (std::istream&, Cities&) to allow for the outputting of a Cities object to a stream
 std::ostream& operator<<(std::ostream& out, Cities &cities)
@@ -69,7 +71,27 @@ Cities Cities::reorder(const permutation_t& ordering) const{
   return new_city_order;
 }
 
+//generates and returns a new permutation of all the numbers from 0 to len -1
+Cities::permutation_t random_permutation(unsigned len){
+   Cities::permutation_t randomized;
+   //obtain a random number 
+   std::random_device rd;
+   //seed generator
+   std::mt19937 eng(rd());
+   //std::default_random_engine generator;
+   //defining range
+   std::uniform_int_distribution<int> distribution(0, len - 1);
+   
+   while(randomized.size() < len){
+	int tmp = distribution(eng);
+        if(std::find(randomized.begin(), randomized.end(), tmp) 
+			== randomized.end()){
+		randomized.push_back(tmp);
+	}
+   }
+   return randomized;
 
+}
  
 
 int main(){
@@ -78,6 +100,7 @@ int main(){
  fin >> cities;
  std::cout << cities.total_path_distance({ 0, 1, 2, 3, 4 }) << "\n";
  std::cout << cities.total_path_distance({ 3, 2, 4, 0, 1 }) << "\n";
+ std::cout << cities.total_path_distance(random_permutation(5)) << "\n";
  return 0;
 }
 
