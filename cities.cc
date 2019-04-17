@@ -62,13 +62,12 @@ double Cities::total_path_distance(const permutation_t& ordering) const{
 // cities reflects the original order of this class after reordering with
 // the given ordering. So for example, the ordering { 1, 0 } simply swaps
 // the first two elements (coordinates) in the new Cities object.
-Cities Cities::reorder(const permutation_t& ordering) const{
-  //change city list so that is reflects the permutation 
-  Cities new_city_order;
-  for(long unsigned int i = 0; i < ordering.size(); i++){
-	  new_city_order.add_coord(city_list_[ordering[i]]);
+Cities Cities::reorder(const permutation_t& ordering) const{ 
+  Cities new_city_order; //Creates new Cities object
+  for(long unsigned int i = 0; i < ordering.size(); i++){//Loop through ordering argument
+	  new_city_order.add_coord(city_list_[ordering[i]]); //Adds the coord in new spot from orginal city list
   }
-  return new_city_order;
+  return new_city_order; //Return the reordered Cities object
 }
 
 //generates and returns a new permutation of all the numbers from 0 to len -1
@@ -93,14 +92,4 @@ Cities::permutation_t random_permutation(unsigned len){
 
 }
  
-
-int main(){
- auto fin = std::ifstream("five.tsv");
- Cities cities;
- fin >> cities;
- std::cout << cities.total_path_distance({ 0, 1, 2, 3, 4 }) << "\n";
- std::cout << cities.total_path_distance({ 3, 2, 4, 0, 1 }) << "\n";
- std::cout << cities.total_path_distance(random_permutation(5)) << "\n";
- return 0;
-}
 
