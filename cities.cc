@@ -82,8 +82,12 @@ Cities::permutation_t random_permutation(unsigned len){
    //defining range
    std::uniform_int_distribution<int> distribution(0, len - 1);
    
+   //while the randomized permutation is not full
    while(randomized.size() < len){
+	//get random integer   
 	int tmp = distribution(eng);
+	//if the random integer is not already in the randomized permuation
+	//add to randomized permutation
         if(std::find(randomized.begin(), randomized.end(), tmp) 
 			== randomized.end()){
 		randomized.push_back(tmp);
